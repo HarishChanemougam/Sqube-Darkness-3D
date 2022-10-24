@@ -7,60 +7,56 @@ using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D _rb;
-    [SerializeField] float _moveSpeed = 5.0f;
-    [SerializeField] float _jumpForce = 6.0f;
-    [SerializeField] bool _jump;
-    [SerializeField] InputActionReference _input;
+    [SerializeField] CharacterController _controller;
+    [SerializeField] Vector3 _playerVelocity;
+    [SerializeField] bool _groundedPlayer;
+    [SerializeField] float _playerSpeed = 2.0f;
+    [SerializeField] float _jumpHeight = 1.0f;
+    [SerializeField] float _gravityValue = -9.81f;
     [SerializeField] Animator _animator;
+    [SerializeField] InputActionReference _input;
 
     private void Start()
     {
-        _rb = gameObject.GetComponent<Rigidbody2D>();
-
-        _jump = true;
-       
+        _controller = gameObject.GetComponent<CharacterController>();
     }
 
     private void Update()
     {
-        float movX = Input.GetAxisRaw("Horizontal");
-        float movY = Input.GetAxisRaw("Vertical");
-
-        if(movX != 0)
+        _groundedPlayer = _controller.isGrounded;
+        if(_groundedPlayer && _playerVelocity.y < 0)
         {
-            _rb.velocity = new Vector2(_moveSpeed * movX, _rb.velocity.y);
+            _playerVelocity.y = 0f;
         }
 
-        if(movY == 1 && ! _jump)
-        {
-            _rb.velocity = new Vector2(_rb.velocity.x, _jumpForce);
+        Vector3 move = new Vector3(0, 0, Input.GetAxis("Horizontal"));
+        _controller.Move(move * Time.deltaTime * _playerSpeed);
 
-            _jump = true;
+        if(move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
         }
 
-        if(movY == 1)
+        if(Input.GetButton("Jump") && _groundedPlayer)
         {
-            transform.localScale = new Vector2(1f, 0.5f);
+            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * _gravityValue);
         }
 
-        else
-        {
-            transform.localScale = new Vector2(1f, 1f);
-        }
-
+        _playerVelocity.y += _gravityValue * Time.deltaTime;
+        _controller.Move(_playerVelocity * Time.deltaTime);
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        _jump = false;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.tag == "BlindSpot")
+        if (collision.tag == "BlindSpot")
         {
             _animator.SetTrigger("2DPlayerEyeBlink");
+
+            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+            var cubeRenderer = cube.GetComponent<Renderer>();
+
+            cubeRenderer.material.SetColor("_color", Color.black);
         }
 
         else
@@ -69,8 +65,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit(Collider collision)
     {
-        
+
     }
 }
