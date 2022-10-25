@@ -5,15 +5,13 @@ using NaughtyAttributes;
 
 public class PlayerTag : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    #region Singleton
+    public static PlayerTag instance;
+    private void Awake()
     {
-        
+        instance = this;
     }
+    #endregion
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] public GameObject player;
 }
