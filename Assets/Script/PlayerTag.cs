@@ -14,4 +14,5 @@ public class PlayerTag : MonoBehaviour
     #endregion
 
     [SerializeField] public GameObject player;
+    internal float magnitude;
 }
