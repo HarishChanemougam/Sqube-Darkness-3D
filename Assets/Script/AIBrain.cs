@@ -20,7 +20,9 @@ public class AIBrain : MonoBehaviour
     [SerializeField] Transform _player;
     [SerializeField] Transform[] _path;
     [SerializeField] float _catchDistance;
+   
 
+    
 
     AIState _state;
     int _pathIndex;
@@ -32,6 +34,8 @@ public class AIBrain : MonoBehaviour
         _state = AIState.PATROL;
         _pathIndex = 0;
         _agent.SetDestination(_path[0].position);
+
+        
     }
     private void Update()
     {
@@ -75,6 +79,8 @@ public class AIBrain : MonoBehaviour
             default:
                 break;
         }
+
+
 
     }
 }

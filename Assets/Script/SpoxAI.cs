@@ -20,7 +20,9 @@ public class SpoxAI : MonoBehaviour
     [SerializeField] Transform _player;
     [SerializeField] Transform[] _path;
     [SerializeField] float _catchDistance;
+    [SerializeField] Animator _animator;
 
+    bool _SpoksFast;
 
     AIState _state;
     int _pathIndex;
@@ -32,6 +34,8 @@ public class SpoxAI : MonoBehaviour
         _state = AIState.PATROL;
         _pathIndex = 0;
         _agent.SetDestination(_path[0].position);
+
+        _animator.SetBool("SpoksFast", _SpoksFast);
     }
     private void Update()
     {
@@ -76,5 +80,13 @@ public class SpoxAI : MonoBehaviour
                 break;
         }
 
+    }
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if(collider == _player)
+        {
+            _animator.SetTrigger("SpoksRotation");
+        }
     }
 }
