@@ -33,7 +33,7 @@ public class AIBrain : MonoBehaviour
     {
         _state = AIState.PATROL;
         _pathIndex = 0;
-        _agent.SetDestination(_path[0].position);
+        _agent.SetDestination(_path[1].position);
 
         
     }
