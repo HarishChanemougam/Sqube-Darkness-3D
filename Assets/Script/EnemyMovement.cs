@@ -10,7 +10,6 @@ public class EnemyMovement : MonoBehaviour
 
     [SerializeField] float _moveSpeed; 
     [SerializeField] float _attackDistance; 
-    [SerializeField] Animator _animator; 
     [SerializeField] PlayerMovement _player; 
     [SerializeField] CharacterController _characterController; 
     [SerializeField] NavMeshAgent _agent;
@@ -79,8 +78,6 @@ public class EnemyMovement : MonoBehaviour
 
         if (_target != null && distanceToPlayer < _attackDistance && _attackRoutine == null) 
         {
-            _animator.SetTrigger("attack_short_001");   
-
             _attackRoutine = StartCoroutine(AttackRoutine());
         }
         else

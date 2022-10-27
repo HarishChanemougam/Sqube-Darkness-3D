@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-public class AIBrain : MonoBehaviour
+public class SpoxAI : MonoBehaviour
 {
     #region Internal type
     enum AIState
