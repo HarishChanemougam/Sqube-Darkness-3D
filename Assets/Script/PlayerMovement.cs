@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.tag == "Player")
+        if(collision.collider.tag == "platform")
         {
             transform.parent.SetParent(_platform.transform);
         }

@@ -287,6 +287,7 @@ GameObject:
   - component: {fileID: 5422723605624875372}
   - component: {fileID: 5422723605624875373}
   - component: {fileID: 4159963180793170551}
+  - component: {fileID: 3010498648112588450}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -332,6 +333,7 @@ MonoBehaviour:
   _gravityValue: -9.81
   _animator: {fileID: 0}
   _input: {fileID: -2199235912274683158, guid: 5a6c38c71839b6144b3a5f6779e50c98, type: 3}
+  _platform: {fileID: 0}
 --- !u!114 &5422723605624875373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,12 +359,27 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 0.8
-  m_Radius: 0.52
+  m_Radius: 0.48
   m_SlopeLimit: 45
   m_StepOffset: 0.3
-  m_SkinWidth: 0.08
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3010498648112588450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5422723605624875363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 078e0b7850552bd41bfd8b91068161ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 605624113678091261}
+  _materalIdle: {fileID: 2100000, guid: 2b4eb55e08960a24790381e72c05228e, type: 2}
+  _materialHover: {fileID: 2100000, guid: b3c250775b45ba64b98803a69e405852, type: 2}
 --- !u!1 &6189923934288161960
 GameObject:
   m_ObjectHideFlags: 0
