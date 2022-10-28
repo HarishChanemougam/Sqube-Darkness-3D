@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float _gravityValue = -9.81f;
     [SerializeField] Animator _animator;
     [SerializeField] InputActionReference _input;
+    [SerializeField] GameObject _platform;
 
     private void Start()
     {
@@ -68,5 +69,23 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerExit(Collider collision)
     {
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.tag == "Player")
+        {
+            transform.parent.SetParent(_platform.transform);
+        }
+
+        else
+        {
+            transform.parent = null;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        
     }
 }
