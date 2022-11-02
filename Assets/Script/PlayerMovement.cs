@@ -30,15 +30,16 @@ public class PlayerMovement : MonoBehaviour
             _playerVelocity.y = 0f;
         }
 
-        Vector3 move = new Vector3(0, 0, Input.GetAxis("Horizontal"));
-        _controller.Move(move * Time.deltaTime * _playerSpeed);
+        /*Vector3 move = new Vector3(0, 0, Input.GetAxis("Horizontal"));*/
+        _playerVelocity.z = (Input.GetAxis("Horizontal")  * _playerSpeed);
 
-        if(move != Vector3.zero)
-        {
-            gameObject.transform.forward = move;
-        }
+                
+            gameObject.transform.forward = _playerVelocity.normalized;
 
-        if(Input.GetButton("Jump") && _groundedPlayer)
+
+
+
+        if (Input.GetButton("Jump") && _groundedPlayer)
         {
             _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * _gravityValue);
         }
@@ -66,26 +67,4 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider collision)
-    {
-
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.tag == "platform")
-        {
-            transform.parent.SetParent(_platform.transform);
-        }
-
-        else
-        {
-            transform.parent = null;
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        
-    }
 }

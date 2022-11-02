@@ -1,5 +1,7 @@
+using NaughtyAttributes;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -9,78 +11,150 @@ public class AIBrain : MonoBehaviour
     #region Internal type
     enum AIState
     {
-        PATROL,
-        CHASE,
-        CATCH
+        PATROL = 1,
+        CHASE = 2,
+        CATCH = 3
     }
     #endregion
-
+    [SerializeField] Transform _root;
+    [SerializeField] Transform[] _patrolPath;
+    [SerializeField] float _destinationDistance;
+    [SerializeField] float _loseDistance;
     [SerializeField] NavMeshAgent _agent;
-    [SerializeField] Sensor _vision;
-    [SerializeField] Transform _player;
-    [SerializeField] Transform[] _path;
-    [SerializeField] float _catchDistance;
-   
+    [SerializeField] EntityLooseGame _lose;
+    [SerializeField] DetectPlayer _detectPlayer;
 
-    
-
-    AIState _state;
-    int _pathIndex;
+    [ShowNonSerializedField] AIState _internalState;
+    [ShowNonSerializedField] int _patrolCurrentIndex;
+    [ShowNonSerializedField] float _patrolDistanceToDestination;
 
 
-
-    private void Start()
+    void Reset()
     {
-        _state = AIState.PATROL;
-        _pathIndex = 0;
-        _agent.SetDestination(_path[1].position);
-
-        
+        _destinationDistance = 0.5f;
     }
-    private void Update()
+
+    void Awake()
     {
-        switch (_state)
+        _internalState = AIState.PATROL;
+        _agent.SetDestination(_patrolPath[_patrolCurrentIndex].position);
+    }
+
+    void Update()
+    {
+        //State Machine implementation
+        switch (_internalState)
         {
             case AIState.PATROL:
-                if (_agent.remainingDistance < _agent.stoppingDistance)
+                // Actions
+                Patrol();
+
+                // Transitions
+                if (_detectPlayer.Target != null) // Transition to Chase 
                 {
-                    _pathIndex++;
-                    if (_pathIndex >= _path.Length)
-                    {
-                        _pathIndex = 0;
-                    }
-                    _agent.SetDestination(_path[_pathIndex].position);
+                    _internalState = AIState.CHASE;
                 }
-
                 break;
-
             case AIState.CHASE:
-
-                _agent.SetDestination(_player.position);
-
-                if (_vision.PlayerFound == null)
+                if (_detectPlayer.Target == null)   // Transition to Patrol
                 {
-                    _state = AIState.PATROL;
+                    _internalState = AIState.PATROL;
+                    break;
                 }
-                _agent.SetDestination(_vision.PlayerFound.transform.position);
 
-                if (Vector3.Distance(_agent.transform.position, _vision.PlayerFound.transform.position) < 1f)
+                // Actions
+                Chase();
+
+                // Transitions
+                var distanceToPlayer = Vector3.Distance(_root.transform.position, _detectPlayer.Target.transform.position);
+
+                if (distanceToPlayer < _loseDistance) // Transition to Attack
                 {
-                    _state = AIState.CATCH;
+                    _internalState = AIState.CATCH;
                 }
+
                 break;
-
             case AIState.CATCH:
-                SceneManager.LoadScene(0);
+                if (_detectPlayer.Target == null)   // Transition to Patrol
+                {
+                    _internalState = AIState.PATROL;
+                    break;
+                }
+                // Actions
+                Catch();
 
+                // Transitions
+                var distanceToPlayer2 = Vector3.Distance(_root.transform.position, _detectPlayer.Target.transform.position);
+                if (distanceToPlayer2 > _loseDistance) // Transition to Chase
+                {
+                    _internalState = AIState.CHASE;
+
+                }
                 break;
-
-
             default:
                 break;
         }
-
-
-
     }
+
+    public void Patrol()
+    {
+        // Estimate distance to change destination
+        var patrolDestination = _patrolPath[_patrolCurrentIndex].position;
+        _patrolDistanceToDestination = Vector3.Distance(_root.transform.position, patrolDestination);
+        if (_patrolDistanceToDestination < _destinationDistance)
+        {
+            _patrolCurrentIndex++;
+            // On a dépassé la taille du tableau donc on retourne vers l'élément 0
+            if (_patrolCurrentIndex >= _patrolPath.Length)
+            {
+                _patrolCurrentIndex = 0;
+            }
+
+            _agent.SetDestination(_patrolPath[_patrolCurrentIndex].position);
+        }
+    }
+
+    public void Chase()
+    {
+        // Move to
+        _agent.SetDestination(_detectPlayer.Target.transform.position);
+    }
+
+    public void Catch()
+    {
+        _agent.isStopped = true;
+        _lose.Activate();
+    }
+
+    #region EDITOR
+#if UNITY_EDITOR
+    [SerializeField, Foldout("Editor")] float _radiusGizmos = 0.5f;
+    private void OnDrawGizmos()
+    {
+        if (_patrolPath == null || _patrolPath.Length == 0) return;
+
+        if (Application.isEditor)
+        {
+            Gizmos.color = Color.blue;
+            var pos = _patrolPath.Select(i => i.position).ToArray();
+            // Draw Lines
+            Gizmos.color = Color.yellow;
+            for (int i = 0; i < _patrolPath.Length - 1; i++)
+            {
+                Gizmos.DrawLine(_patrolPath[i].position, _patrolPath[i + 1].position);
+            }
+            Gizmos.DrawLine(_patrolPath[0].position, _patrolPath[pos.Length - 1].position);
+
+            // Then draw spheres
+            Gizmos.color = Color.blue;
+            foreach (var el in pos)
+            {
+                Gizmos.DrawSphere(el, _radiusGizmos);
+            }
+        }
+    }
+#endif
+
+    #endregion
+
 }

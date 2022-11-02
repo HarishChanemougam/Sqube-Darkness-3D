@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
+[CreateAssetMenu(menuName = "LevelReference")]
 public class GameLevel : MonoBehaviour
 {
-   
+    Level _currentLevel;
+
     [SerializeField, Scene] int _sceneIndex;
 
-  
+
     public void LoadLevel()
     {
         StartCoroutine(LoadAsynchronously(_sceneIndex));
@@ -26,5 +29,12 @@ public class GameLevel : MonoBehaviour
             yield return null;
         }
     }
+   
+      /*   public Level CurrentLevel
+        {
+           get => _currentLevel;
+           Set => _currentLevl = value;
+        }*/
+
 
 }

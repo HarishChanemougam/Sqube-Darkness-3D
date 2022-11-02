@@ -66,6 +66,8 @@ GameObject:
   - component: {fileID: 3636685937701716671}
   - component: {fileID: 7839173751339934585}
   - component: {fileID: 2007869509494766733}
+  - component: {fileID: 7353511347559506687}
+  - component: {fileID: 1395619297012628907}
   m_Layer: 3
   m_Name: Spoks
   m_TagString: Untagged
@@ -156,13 +158,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64653bed00ba15b4e84b5bb8833d6a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _root: {fileID: 0}
+  _patrolPath: []
+  _destinationDistance: 0
+  _loseDistance: 0
   _agent: {fileID: 0}
-  _vision: {fileID: 8212199814176477372}
-  _player: {fileID: 0}
-  _path:
-  - {fileID: 0}
-  - {fileID: 0}
-  _catchDistance: 3
+  _lose: {fileID: 0}
+  _detectPlayer: {fileID: 0}
+  _radiusGizmos: 0.5
+--- !u!114 &7353511347559506687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64397053134118152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 896065cc786806347aa20909a3952e10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _level: {fileID: 0}
+--- !u!114 &1395619297012628907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64397053134118152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9f168a7291198a4481536f6367efbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mapLayer: Default
 --- !u!1 &64397053344527601
 GameObject:
   m_ObjectHideFlags: 0
