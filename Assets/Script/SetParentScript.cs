@@ -8,17 +8,18 @@ public class SetParentScript : MonoBehaviour
     
     private void OnCollisionEnter(Collision collision)
     {
-        PlayerTag tag = collision.transform.GetComponentInParent<PlayerTag>();
-        
-        tag.gameObject.transform.SetParent(transform);
-
-        Debug.Log("yep!");
+        if (collision.gameObject.tag == "player")
+        {
+            collision.transform.parent = transform;
+        }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        PlayerTag tag = collision.transform.GetComponentInParent<PlayerTag>();
+        if(collision.gameObject.tag == null)
+        {
+        collision.gameObject.transform.SetParent(null);
+        }
 
-        tag.gameObject.transform.SetParent(null);
     }
 }

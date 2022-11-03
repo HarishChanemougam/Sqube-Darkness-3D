@@ -4,48 +4,56 @@ using UnityEngine;
 using NaughtyAttributes;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] CharacterController _controller;
-    [SerializeField] Vector3 _playerVelocity;
-    [SerializeField] bool _groundedPlayer;
-    [SerializeField] float _playerSpeed = 2.0f;
-    [SerializeField] float _jumpHeight = 1.0f;
-    [SerializeField] float _gravityValue = -9.81f;
+    [SerializeField] InputActionReference _moveInput;
+    [SerializeField] InputActionReference _jumpInput;
     [SerializeField] Animator _animator;
-    [SerializeField] InputActionReference _input;
-    [SerializeField] GameObject _platform;
+    [SerializeField] EntityMovement _movement;
+    [SerializeField] Rigidbody _rb;
+    [SerializeField] float _moveSpeed;
 
     private void Start()
     {
-        _controller = gameObject.GetComponent<CharacterController>();
+        _moveInput.action.started += MoveUpdate;
+        _moveInput.action.performed += MoveUpdate;
+        _moveInput.action.canceled += MoveStop;
+
+        _jumpInput.action.started += LaunchJump;
     }
 
-    private void Update()
+    internal void StopInput()
     {
-        _groundedPlayer = _controller.isGrounded;
-        if(_groundedPlayer && _playerVelocity.y < 0)
-        {
-            _playerVelocity.y = 0f;
-        }
+        _movement.Direction = Vector3.zero;
+        _moveInput.action.actionMap.Disable();
+    }
 
-        /*Vector3 move = new Vector3(0, 0, Input.GetAxis("Horizontal"));*/
-        _playerVelocity.z = (Input.GetAxis("Horizontal")  * _playerSpeed);
+    private void LaunchJump(InputAction.CallbackContext obj)
+    {
+        _movement.Jump = true;
+    }
 
-                
-            gameObject.transform.forward = _playerVelocity.normalized;
+    private void OnDestroy()
+    {
+        _moveInput.action.started -= MoveUpdate;
+        _moveInput.action.performed -= MoveUpdate;
+        _moveInput.action.canceled -= MoveStop;
+    }
 
+    private void MoveUpdate(InputAction.CallbackContext obj)
+    {
+        float movez = Input.GetAxis("Horizontal");
+        float movey = Input.GetAxis("Vertical");
+        _movement.Direction = new Vector3(0, movey, movez).normalized;
 
+        
+    }
 
-
-        if (Input.GetButton("Jump") && _groundedPlayer)
-        {
-            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * _gravityValue);
-        }
-
-        _playerVelocity.y += _gravityValue * Time.deltaTime;
-        _controller.Move(_playerVelocity * Time.deltaTime);
+    private void MoveStop(InputAction.CallbackContext obj)
+    {
+        _movement.Direction = Vector3.zero;
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -66,5 +74,6 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetTrigger("2DPlayerEyeBlink2");
         }
     }
+
 
 }
