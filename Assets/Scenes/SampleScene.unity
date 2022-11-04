@@ -5694,6 +5694,12 @@ PrefabInstance:
       objectReference: {fileID: 5422723604590257254}
     - target: {fileID: 7712178857468278501, guid: 3e1ebd4f7afa68741a18d2b0ff1ec79b,
         type: 3}
+      propertyPath: _input
+      value: 
+      objectReference: {fileID: -7207681170375953093, guid: 5a6c38c71839b6144b3a5f6779e50c98,
+        type: 3}
+    - target: {fileID: 7712178857468278501, guid: 3e1ebd4f7afa68741a18d2b0ff1ec79b,
+        type: 3}
       propertyPath: _gravity
       value: 0
       objectReference: {fileID: 0}
@@ -5715,7 +5721,12 @@ PrefabInstance:
     - target: {fileID: 7712178857468278501, guid: 3e1ebd4f7afa68741a18d2b0ff1ec79b,
         type: 3}
       propertyPath: _jumpForce
-      value: 5
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712178857468278501, guid: 3e1ebd4f7afa68741a18d2b0ff1ec79b,
+        type: 3}
+      propertyPath: _groundPlayer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7712178857468278501, guid: 3e1ebd4f7afa68741a18d2b0ff1ec79b,
         type: 3}

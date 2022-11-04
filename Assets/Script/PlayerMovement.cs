@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Animator _animator;
     [SerializeField] Rigidbody _rb;
    
+   
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();

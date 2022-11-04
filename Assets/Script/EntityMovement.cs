@@ -13,11 +13,14 @@ public class EntityMovement : MonoBehaviour
     [SerializeField] float _slowTime;
     [SerializeField] float _rotationSpeed;
 
-
-    [SerializeField] float _gravity = 9f;
+    [SerializeField] bool _groundPlayer;
+    [SerializeField] Vector3 _playerVelocity;
+    [SerializeField] float _gravityValue = -9.8f;
     [SerializeField] float _jumpForce;
     [SerializeField] float _pullDown = 3f;
     [SerializeField] Rigidbody _rb;
+    [SerializeField] InputActionReference _input;
+    [SerializeField] float _jumpHeight = 1f;
 
     Vector3 _direction;
     bool _isJumping;
@@ -66,6 +69,7 @@ public class EntityMovement : MonoBehaviour
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
+        _isJumping = true;
     }
     private void Update()
     {
@@ -86,26 +90,35 @@ public class EntityMovement : MonoBehaviour
         float Value = Mathf.LerpAngle(currentYAxis, YAxis, Time.deltaTime * _rotationSpeed);
         _characterController.transform.rotation = Quaternion.Euler(0, Value, 0);
 
-        if(_characterController.isGrounded)
-        {
-            CalculatedDirection.y = 0;
-        }
+        float movZ = Input.GetAxisRaw("Horizontal");
+        float movY = Input.GetAxisRaw("Vertical");
 
-        else
+        if(movZ != 0)
         {
-            CalculatedDirection.y += _gravity * Time.deltaTime;
-        }
+            _groundPlayer = _characterController.isGrounded;
 
-        if(_isJumping)
-        {
-            _isJumping = false;
-
-            if(_characterController.isGrounded)
+            if(_groundPlayer && _playerVelocity.y < 0)
             {
-                CalculatedDirection.y = _jumpForce;
-                _rb.AddForce(Vector3.up * 15f, ForceMode.Impulse);
+                _rb.velocity = new Vector2(_speed * movZ, _rb.velocity.y);
+                _playerVelocity.y = 0f;
             }
+
+            if(movY == 1 && ! _isJumping)
+            {
+                _rb.velocity = new Vector2(_rb.velocity.z, _jumpForce);
+
+                _isJumping = true;
+            }
+
+            if(_input == _isJumping)
+            {
+                transform.localScale = new Vector2(1f, 1f);
+                _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3f * _gravityValue);
+            }
+
+
         }
+
        
     }
 
