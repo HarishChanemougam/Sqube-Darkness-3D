@@ -1,7 +1,9 @@
 using NaughtyAttributes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -13,7 +15,8 @@ public class AIBrain : MonoBehaviour
     {
         PATROL = 1,
         CHASE = 2,
-        CATCH = 3
+        CATCH = 3,
+        ATTACK = 4
     }
     #endregion
     [SerializeField] Transform _root;
@@ -21,8 +24,8 @@ public class AIBrain : MonoBehaviour
     [SerializeField] float _destinationDistance;
     [SerializeField] float _loseDistance;
     [SerializeField] NavMeshAgent _agent;
-    [SerializeField] EntityLooseGame _lose;
     [SerializeField] DetectPlayer _detectPlayer;
+    [SerializeField] EntityMovement _player;
 
     [ShowNonSerializedField] AIState _internalState;
     [ShowNonSerializedField] int _patrolCurrentIndex;
@@ -42,69 +45,76 @@ public class AIBrain : MonoBehaviour
 
     void Update()
     {
-        //State Machine implementation
+      
         switch (_internalState)
         {
             case AIState.PATROL:
-                // Actions
+               
                 Patrol();
 
-                // Transitions
-                if (_detectPlayer.Target != null) // Transition to Chase 
+               
+                if (_detectPlayer.Target != null) 
                 {
                     _internalState = AIState.CHASE;
                 }
                 break;
             case AIState.CHASE:
-                if (_detectPlayer.Target == null)   // Transition to Patrol
+                Chase();
+                if (_detectPlayer.Target == null)   
                 {
                     _internalState = AIState.PATROL;
                     break;
                 }
 
-                // Actions
-                Chase();
-
-                // Transitions
                 var distanceToPlayer = Vector3.Distance(_root.transform.position, _detectPlayer.Target.transform.position);
 
-                if (distanceToPlayer < _loseDistance) // Transition to Attack
+                if (distanceToPlayer < _loseDistance) 
                 {
                     _internalState = AIState.CATCH;
                 }
 
                 break;
             case AIState.CATCH:
-                if (_detectPlayer.Target == null)   // Transition to Patrol
+                Catch();
+                if (_detectPlayer.Target == null)   
                 {
                     _internalState = AIState.PATROL;
                     break;
                 }
-                // Actions
-                Catch();
-
-                // Transitions
+              
                 var distanceToPlayer2 = Vector3.Distance(_root.transform.position, _detectPlayer.Target.transform.position);
-                if (distanceToPlayer2 > _loseDistance) // Transition to Chase
+                if (distanceToPlayer2 > _loseDistance) 
                 {
                     _internalState = AIState.CHASE;
 
                 }
                 break;
+
+            case AIState.ATTACK:
+                Attack();
+
+                if(_detectPlayer.Target == _player.transform)
+                {
+                    Destroy(gameObject);
+                }
+            
+                break;
+
             default:
                 break;
         }
     }
 
+
     public void Patrol()
     {
-        // Estimate distance to change destination
+       
         var patrolDestination = _patrolPath[_patrolCurrentIndex].position;
         _patrolDistanceToDestination = Vector3.Distance(_root.transform.position, patrolDestination);
         if (_patrolDistanceToDestination < _destinationDistance)
         {
             _patrolCurrentIndex++;
-            // On a dépassé la taille du tableau donc on retourne vers l'élément 0
+           
             if (_patrolCurrentIndex >= _patrolPath.Length)
             {
                 _patrolCurrentIndex = 0;
@@ -116,14 +126,22 @@ public class AIBrain : MonoBehaviour
 
     public void Chase()
     {
-        // Move to
+       
         _agent.SetDestination(_detectPlayer.Target.transform.position);
     }
 
     public void Catch()
     {
         _agent.isStopped = true;
-        _lose.Activate();
+      
+    }
+    private void Attack()
+    {
+        if(Collider.FindObjectOfType<PlayerTag>())
+        {
+
+        Destroy(gameObject);
+        }
     }
 
     #region EDITOR
@@ -137,7 +155,7 @@ public class AIBrain : MonoBehaviour
         {
             Gizmos.color = Color.blue;
             var pos = _patrolPath.Select(i => i.position).ToArray();
-            // Draw Lines
+          
             Gizmos.color = Color.yellow;
             for (int i = 0; i < _patrolPath.Length - 1; i++)
             {
@@ -145,7 +163,7 @@ public class AIBrain : MonoBehaviour
             }
             Gizmos.DrawLine(_patrolPath[0].position, _patrolPath[pos.Length - 1].position);
 
-            // Then draw spheres
+          
             Gizmos.color = Color.blue;
             foreach (var el in pos)
             {

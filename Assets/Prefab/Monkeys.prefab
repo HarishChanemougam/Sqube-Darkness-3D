@@ -172,7 +172,6 @@ GameObject:
   - component: {fileID: 6361081065322813634}
   - component: {fileID: 6361081065322813633}
   - component: {fileID: 6361081065322813639}
-  - component: {fileID: 1631980823606519966}
   - component: {fileID: 82663564528493257}
   m_Layer: 0
   m_Name: Monkeys
@@ -270,22 +269,8 @@ MonoBehaviour:
   _destinationDistance: 0
   _loseDistance: 0
   _agent: {fileID: 6361081065322813632}
-  _lose: {fileID: 0}
   _detectPlayer: {fileID: 0}
   _radiusGizmos: 0.5
---- !u!114 &1631980823606519966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6361081065322813636}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 896065cc786806347aa20909a3952e10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _level: {fileID: 0}
 --- !u!114 &82663564528493257
 MonoBehaviour:
   m_ObjectHideFlags: 0
