@@ -139,7 +139,6 @@ public class AIBrain : MonoBehaviour
     {
         if(Collider.FindObjectOfType<PlayerTag>())
         {
-
         Destroy(gameObject);
         }
     }

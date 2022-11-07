@@ -66,7 +66,6 @@ GameObject:
   - component: {fileID: 3636685937701716671}
   - component: {fileID: 7839173751339934585}
   - component: {fileID: 2007869509494766733}
-  - component: {fileID: 7353511347559506687}
   - component: {fileID: 1395619297012628907}
   m_Layer: 3
   m_Name: Spoks
@@ -166,19 +165,6 @@ MonoBehaviour:
   _lose: {fileID: 0}
   _detectPlayer: {fileID: 0}
   _radiusGizmos: 0.5
---- !u!114 &7353511347559506687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 64397053134118152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 896065cc786806347aa20909a3952e10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _level: {fileID: 0}
 --- !u!114 &1395619297012628907
 MonoBehaviour:
   m_ObjectHideFlags: 0

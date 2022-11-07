@@ -4,159 +4,52 @@ using UnityEngine;
 using NaughtyAttributes;
 using UnityEngine.InputSystem;
 using TMPro;
-using UnityEngine.EventSystems;
-using System;
-using UnityEditor.Rendering.LookDev;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] CharacterController _characterController;
+    [SerializeField] CharacterController _controller;
+    [SerializeField] Vector3 _playerVelocity;
+    [SerializeField] bool _groundedPlayer;
+    [SerializeField] float _playerSpeed = 2.0f;
+    [SerializeField] float _jumpHeight = 1.0f;
+    [SerializeField] float _gravityValue = -9.81f;
+    [SerializeField] Animator _animator;
     [SerializeField] InputActionReference _moveInput;
     [SerializeField] InputActionReference _jumpInput;
-    [SerializeField] InputActionReference _SlowTimeInput;
     [SerializeField] InputActionReference _invisibilityInput;
-    [SerializeField] InputActionReference _SafeModeInput;
+    [SerializeField] InputActionReference _slowTimeInput;
     [SerializeField] InputActionReference _blastInput;
-    [SerializeField] EntityMovement _movement;
-    [SerializeField] Animator _animator;
-    [SerializeField] Rigidbody _rb;
-   
-   
+
     private void Start()
     {
-        _rb = GetComponent<Rigidbody>();
-        _characterController = GetComponent<CharacterController>();
-
-        _moveInput.action.started += Move;
-        _moveInput.action.performed += Move;
-        _moveInput.action.canceled += End;
-
-
-        _jumpInput.action.started += StartJump;
-        _jumpInput.action.canceled += StopJump;
-        
+        _controller = gameObject.GetComponent<CharacterController>();
     }
 
     private void Update()
     {
-        if (_characterController.isGrounded)
+        _groundedPlayer = _controller.isGrounded;
+        if(_groundedPlayer && _playerVelocity.y < 0)
         {
-            print("CharacterController is grounded");
+            _playerVelocity.y = 0f;
         }
+
+        Vector3 move = new Vector3(0, 0, Input.GetAxis("Horizontal"));
+        _controller.Move(move * Time.deltaTime * _playerSpeed);
+
+        if(move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
+        }
+
+        if(Input.GetButton("Jump") && _groundedPlayer)
+        {
+            _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3.0f * _gravityValue);
+        }
+
+        _playerVelocity.y += _gravityValue * Time.deltaTime;
+        _controller.Move(_playerVelocity * Time.deltaTime);
     }
-
-        private void FixedUpdate()
-    {
-        _SlowTimeInput.action.started += StartTime;
-        _SlowTimeInput.action.canceled += StopTime;
-
-
-        _invisibilityInput.action.started += StartInvisibility;
-        _invisibilityInput.action.canceled += StopInvisibility;
-
-
-        _SafeModeInput.action.started += StartSafeMode;
-        _SafeModeInput.action.canceled += StopSafeMode;
-
-
-        _blastInput.action.started += StartBlast;
-        _blastInput.action.canceled += StopBlast;
-    }
-
-
-    private void OnDestroy()
-    {
-        _moveInput.action.started -= Move;
-        _moveInput.action.performed -= Move;
-        _moveInput.action.canceled -= End;
-
-
-        _jumpInput.action.started -= StartJump;
-        _jumpInput.action.canceled -= StopJump;
-
-
-        _SlowTimeInput.action.started -= StartTime;
-        _SlowTimeInput.action.canceled -= StopTime;
-    }
-
-
-    ///Move///
-    private void Move(InputAction.CallbackContext obj)
-    {
-        Vector2 dir = obj.ReadValue<Vector2>();
-        _movement.Direction = new Vector3(0, dir.y, dir.x);
-    }
-  
-    private void End(InputAction.CallbackContext obj)
-    {
-        _movement.Direction = Vector2.zero;
-    }
-
-
-    ///Jump///
-    private void StartJump(InputAction.CallbackContext obj)
-    {
-        _movement.IsJumping = true;
-       
-    }
-  
-    private void StopJump(InputAction.CallbackContext obj)
-    {
-        _movement.IsJumping = false;
-
-        var forceEffect = obj.duration;
-        _rb.AddForce(Vector3.up * (10f * (float)forceEffect), ForceMode.Impulse);
-    }
-
-
-    ///Time///
-    private void StartTime(InputAction.CallbackContext obj)
-    {
-        _movement.SlowTime = true;
-    }
- 
-    private void StopTime(InputAction.CallbackContext obj)
-    {
-        _movement.SlowTime = false;
-    }
-
-
-    ///Invisibility///
-    private void StartInvisibility(InputAction.CallbackContext obj)
-    {
-        _movement.Invisibility = true;
-    }
- 
-    private void StopInvisibility(InputAction.CallbackContext obj)
-    {
-        _movement.Invisibility = false;
-    }
-
-
-    ///SafeMode///
-    private void StartSafeMode(InputAction.CallbackContext obj)
-    {
-        _movement.SafeMode = true;
-    }
-
-    private void StopSafeMode(InputAction.CallbackContext obj)
-    {
-        _movement.SafeMode = false;
-    }
-
-
-    ///Blast///
-    private void StartBlast(InputAction.CallbackContext obj)
-    {
-        _movement.Blast = true;
-    }
-
-    private void StopBlast(InputAction.CallbackContext obj)
-    {
-        _movement.Blast = false;
-    }
-
-    #region colorChange
+    #region Color
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.tag == "BlindSpot")
@@ -174,6 +67,11 @@ public class PlayerMovement : MonoBehaviour
         {
             _animator.SetTrigger("2DPlayerEyeBlink2");
         }
+    }
+
+    private void OnTriggerExit(Collider collision)
+    {
+
     }
 
     #endregion

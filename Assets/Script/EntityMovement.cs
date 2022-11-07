@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -69,15 +70,15 @@ public class EntityMovement : MonoBehaviour
     private void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        _isJumping = true;
+        /*_isJumping = true;*/
     }
     private void Update()
     {
-        if(_characterController.isGrounded)
+        if (_characterController.isGrounded)
         {
-            print("CharacterController is grounded");
-        }
+            Debug.Log("is grounded");
 
+        }
         Vector3 CalculatedDirection = _direction * Time.deltaTime * _speed;
 
         CalculatedDirection = _characterController.transform.TransformDirection(CalculatedDirection);
@@ -90,37 +91,72 @@ public class EntityMovement : MonoBehaviour
         float Value = Mathf.LerpAngle(currentYAxis, YAxis, Time.deltaTime * _rotationSpeed);
         _characterController.transform.rotation = Quaternion.Euler(0, Value, 0);
 
-        float movZ = Input.GetAxisRaw("Horizontal");
+
+        /*else
+        {
+            _jumpForce += _gravityValue * Time.deltaTime;
+        }
+
+        if(_isJumping)
+        {
+            _isJumping = false;
+            if (_characterController.isGrounded)
+            {
+                _gravityValue = _jumpForce;
+            }
+        }
+
+        else
+        {
+            _isJumping = true;
+        }*/
+
+
+
+
+        /*float movZ = Input.GetAxisRaw("Horizontal");
         float movY = Input.GetAxisRaw("Vertical");
 
-        if(movZ != 0)
+        if (movZ != 0)
         {
             _groundPlayer = _characterController.isGrounded;
 
-            if(_groundPlayer && _playerVelocity.y < 0)
+            if (_groundPlayer && _playerVelocity.y < 0)
             {
                 _rb.velocity = new Vector2(_speed * movZ, _rb.velocity.y);
                 _playerVelocity.y = 0f;
             }
 
-            if(movY == 1 && ! _isJumping)
+            if (movY == 1 && !_isJumping)
             {
                 _rb.velocity = new Vector2(_rb.velocity.z, _jumpForce);
 
                 _isJumping = true;
             }
 
-            if(_input == _isJumping)
+            if (_input == _isJumping)
             {
                 transform.localScale = new Vector2(1f, 1f);
                 _playerVelocity.y += Mathf.Sqrt(_jumpHeight * -3f * _gravityValue);
             }
+            _rb.velocity = new Vector2(_rb.velocity.z, _jumpForce);
+            _isJumping = true;
+
+            if (movY == 1)
+            {
+                transform.localScale = new Vector3(1f, 05f);
+            }
+
+            else
+            {
+                transform.localScale = new Vector3(1f, 1f);
+            }
+        }*/
 
 
-        }
-
-       
     }
+
+
 
     private void FixedUpdate()
     {
