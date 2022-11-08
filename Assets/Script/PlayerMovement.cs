@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float _jumpHeight = 1.0f;
     [SerializeField] float _gravityValue = -9.81f;
     [SerializeField] Animator _animator;
+
     [SerializeField] InputActionReference _moveInput;
     [SerializeField] InputActionReference _jumpInput;
     [SerializeField] InputActionReference _invisibilityInput;
@@ -22,7 +23,20 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
-        _controller = gameObject.GetComponent<CharacterController>();
+        _moveInput.action.started += Move;
+        _moveInput.action.performed += Move;
+        _moveInput.action.canceled += StopMove;
+    }
+
+
+    private void Move(InputAction.CallbackContext obj)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private void StopMove(InputAction.CallbackContext obj)
+    {
+        throw new System.NotImplementedException();
     }
 
     private void Update()

@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 6534570595690725885}
   - component: {fileID: 6534570595690725884}
   - component: {fileID: 6400722890297765344}
+  - component: {fileID: 3980454310753166218}
+  - component: {fileID: 6936625903233296189}
   m_Layer: 0
   m_Name: MovingSpickes
   m_TagString: Untagged
@@ -71,6 +73,32 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3980454310753166218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6534570595690725826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bc9ec33e001034598cf1466cba66bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stop: 1
+--- !u!114 &6936625903233296189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6534570595690725826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad0d7c4372327542b5a05855a81d391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameOver: {fileID: 3980454310753166218}
 --- !u!1001 &6534570594586373502
 PrefabInstance:
   m_ObjectHideFlags: 0

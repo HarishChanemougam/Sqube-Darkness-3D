@@ -90,7 +90,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: baab463728ae650459a67a7d70807d00,
         type: 3}
       propertyPath: m_Name
-      value: Spickes
+      value: Spickes Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1541998606474349963, guid: baab463728ae650459a67a7d70807d00,
         type: 3}
@@ -118,3 +118,29 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.2697208, y: 2.4511368, z: 5.8822646}
   m_Center: {x: -0.052025333, y: -0.005336916, z: -1.5216722}
+--- !u!114 &281029106964302516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852558684352655809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bc9ec33e001034598cf1466cba66bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stop: 1
+--- !u!114 &2128770526186635824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8852558684352655809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bad0d7c4372327542b5a05855a81d391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameOver: {fileID: 281029106964302516}

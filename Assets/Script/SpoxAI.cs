@@ -145,7 +145,7 @@ public class SpoxAI : MonoBehaviour
     }
 
     #region EDITOR
-#if UNITY_EDITOR
+
     [SerializeField, Foldout("Editor")] float _radiusGizmos = 0.5f;
     private void OnDrawGizmos()
     {
@@ -171,7 +171,7 @@ public class SpoxAI : MonoBehaviour
             }
         }
     }
-#endif
+
 
     #endregion
 

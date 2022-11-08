@@ -253,6 +253,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5422723604791003162}
+  - component: {fileID: 7283620846434141020}
   m_Layer: 0
   m_Name: Physic
   m_TagString: Untagged
@@ -275,6 +276,19 @@ Transform:
   m_Father: {fileID: 5422723605624875362}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7283620846434141020
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5422723604791003163}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5422723605624875363
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,10 +299,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5422723605624875362}
   - component: {fileID: 4159963180793170551}
-  - component: {fileID: 5422723605624875372}
+  - component: {fileID: 7712178857468278501}
   - component: {fileID: 5422723605624875373}
   - component: {fileID: 3010498648112588450}
-  - component: {fileID: 7712178857468278501}
   - component: {fileID: 3078473079107184922}
   m_Layer: 0
   m_Name: Player
@@ -333,7 +346,7 @@ CharacterController:
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5422723605624875372
+--- !u!114 &7712178857468278501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -342,20 +355,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 5422723605624875363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a460ee2ff4201049b4fa5c9042811ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 5517257b86ed6d04aa3b159b83de9515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveInput: {fileID: -2199235912274683158, guid: 5a6c38c71839b6144b3a5f6779e50c98,
-    type: 3}
-  _jumpInput: {fileID: -7207681170375953093, guid: 5a6c38c71839b6144b3a5f6779e50c98,
-    type: 3}
-  _SlowTimeInput: {fileID: 0}
-  _invisibilityInput: {fileID: 0}
-  _SafeModeInput: {fileID: 0}
-  _blastInput: {fileID: 0}
-  _movement: {fileID: 7712178857468278501}
-  _animator: {fileID: 5422723604442139534}
+  _characterController: {fileID: 0}
+  _speed: 5
+  _slowTime: 0
+  _rotationSpeed: 0
+  _animator: {fileID: 0}
+  _groundPlayer: 0
+  _playerVelocity: {x: 0, y: 0, z: 0}
+  _gravityValue: -9.8
+  _jumpForce: 0
+  _pullDown: 3
   _rb: {fileID: 0}
+  _jumpHeight: 1
+  _moveInput: {fileID: 0}
+  _jumpInput: {fileID: 0}
+  _invisibilityInput: {fileID: 0}
+  _slowTimeInput: {fileID: 0}
+  _safeModeInput: {fileID: 0}
+  _blastInput: {fileID: 0}
 --- !u!114 &5422723605624875373
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -384,25 +404,6 @@ MonoBehaviour:
   _renderer: {fileID: 605624113678091261}
   _materalIdle: {fileID: 2100000, guid: 2b4eb55e08960a24790381e72c05228e, type: 2}
   _materialHover: {fileID: 2100000, guid: b3c250775b45ba64b98803a69e405852, type: 2}
---- !u!114 &7712178857468278501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5422723605624875363}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5517257b86ed6d04aa3b159b83de9515, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _characterController: {fileID: 0}
-  _speed: 5
-  _slowTime: 0
-  _rotationSpeed: 0
-  _gravity: 9
-  _jumpForce: 0
-  _pullDown: 3
 --- !u!54 &3078473079107184922
 Rigidbody:
   m_ObjectHideFlags: 0
