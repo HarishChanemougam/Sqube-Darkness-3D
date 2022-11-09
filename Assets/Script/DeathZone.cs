@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeathZone : MonoBehaviour
 {
@@ -8,15 +9,15 @@ public class DeathZone : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.attachedRigidbody.gameObject.tag == "player")
+        if (collision.gameObject.tag == "Player")
         {
-            Destroy(collision.attachedRigidbody.gameObject);
+            Destroy(collision.gameObject);
             _gameOver.EndGame();
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider collision)
     {
-        
+
     }
 }
