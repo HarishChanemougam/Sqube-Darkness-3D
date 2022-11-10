@@ -4,6 +4,8 @@ using UnityEngine;
 using NaughtyAttributes;
 using UnityEngine.Events;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Data;
+using System;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -53,4 +55,13 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    private void hurtEnmey(int damage)
+    {
+        _currentHealth -= damage;   
+    }
+
+    internal void HurtEnmey(int damageToGive)
+    {
+        throw new NotImplementedException();
+    }
 }

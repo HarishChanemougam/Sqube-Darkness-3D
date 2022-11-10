@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Gun : MonoBehaviour
+{
+    internal bool isFiring;
+    [SerializeField] bool _IsFiring;
+    [SerializeField] Bullet _buller;
+    [SerializeField] float _bulletSpeed;
+    [SerializeField] float _timeBetweenShots;
+    [SerializeField] Transform _firePoint;
+
+    private float _shotCounter;
+    private void Update()
+    {
+        if(_IsFiring)
+        {
+            _shotCounter -= Time.deltaTime;
+            if(_shotCounter <= 0)
+            {
+                _shotCounter = _timeBetweenShots;
+                Bullet newbullet = Instantiate(_buller, _firePoint.position, _firePoint.rotation) as Bullet;
+                newbullet.speed = _bulletSpeed;
+            }
+
+            else
+            {
+                _shotCounter = 0;
+            }
+        }
+    }
+}

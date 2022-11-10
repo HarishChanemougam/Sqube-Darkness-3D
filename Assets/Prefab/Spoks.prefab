@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 7839173751339934585}
   - component: {fileID: 2007869509494766733}
   - component: {fileID: 1395619297012628907}
+  - component: {fileID: 2179582539623216096}
   m_Layer: 3
   m_Name: Spoks
   m_TagString: Untagged
@@ -162,8 +163,9 @@ MonoBehaviour:
   _destinationDistance: 0
   _loseDistance: 0
   _agent: {fileID: 0}
-  _lose: {fileID: 0}
   _detectPlayer: {fileID: 0}
+  _player: {fileID: 0}
+  _gameOver: {fileID: 2179582539623216096}
   _radiusGizmos: 0.5
 --- !u!114 &1395619297012628907
 MonoBehaviour:
@@ -178,6 +180,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mapLayer: Default
+--- !u!114 &2179582539623216096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64397053134118152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bc9ec33e001034598cf1466cba66bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stop: 1
 --- !u!1 &64397053344527601
 GameObject:
   m_ObjectHideFlags: 0

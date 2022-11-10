@@ -26,6 +26,7 @@ public class SpoxAI : MonoBehaviour
     [SerializeField] NavMeshAgent _agent;
     [SerializeField] DetectPlayer _detectPlayer;
     [SerializeField] EntityMovement _player;
+    [SerializeField] GameOver _gameOver;
 
     [ShowNonSerializedField] AIState _internalState;
     [ShowNonSerializedField] int _patrolCurrentIndex;
@@ -97,7 +98,8 @@ public class SpoxAI : MonoBehaviour
 
                 if (_detectPlayer.Target == _player.transform)
                 {
-                    Destroy(gameObject);
+                    Destroy(_player.gameObject);
+                    _gameOver.EndGame();
                 }
 
                 break;
@@ -138,10 +140,13 @@ public class SpoxAI : MonoBehaviour
     }
     private void Attack()
     {
-        if (Collider.FindObjectOfType<PlayerTag>())
-        {
-            Destroy(gameObject);
-        }
+        
+            if (_detectPlayer.Target == _player.transform)
+            {
+                Destroy(_player.gameObject);
+                _gameOver.EndGame();
+            }
+        
     }
 
     #region EDITOR

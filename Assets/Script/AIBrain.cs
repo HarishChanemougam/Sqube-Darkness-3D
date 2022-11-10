@@ -26,6 +26,7 @@ public class AIBrain : MonoBehaviour
     [SerializeField] NavMeshAgent _agent;
     [SerializeField] DetectPlayer _detectPlayer;
     [SerializeField] EntityMovement _player;
+    [SerializeField] Gun _gun;
 
     [ShowNonSerializedField] AIState _internalState;
     [ShowNonSerializedField] int _patrolCurrentIndex;
@@ -139,9 +140,17 @@ public class AIBrain : MonoBehaviour
     {
         if(Collider.FindObjectOfType<PlayerTag>())
         {
+        _gun.isFiring = true;
         Destroy(gameObject);
         }
+
+        else
+        {
+            _gun.isFiring = false;
+        }
     }
+
+   
 
     #region EDITOR
 #if UNITY_EDITOR
