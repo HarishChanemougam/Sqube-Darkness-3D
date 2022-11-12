@@ -16,7 +16,7 @@ public class Hover : MonoBehaviour
         if (collision.collider.GetComponent<BlindSpotTag>() != null)
         {
             _renderer.material = _materialHover;
-            Debug.Log("red");
+            
         }
         else
         {

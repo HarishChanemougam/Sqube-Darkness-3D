@@ -190,7 +190,7 @@ public class EntityMovement : MonoBehaviour
         if(_characterController.isGrounded == false)
         {
             CalculatedDirection.y += _gravityValue * Time.deltaTime;
-            Debug.Log("Is Grounded", this);
+           
         }
         /*else
         {

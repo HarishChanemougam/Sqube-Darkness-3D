@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+        transform.Translate(Vector3.down * _speed * Time.deltaTime);
         _lifeTime -= Time.deltaTime;
 
         if(_lifeTime < 0)
