@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.Audio;
 
 public class EntityMovement : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class EntityMovement : MonoBehaviour
     [SerializeField] InputActionReference _slowTimeInput;
     [SerializeField] InputActionReference _safeModeInput;
     [SerializeField] InputActionReference _blastInput;
+    [SerializeField] AudioSource _audioSource;
 
 
     Vector3 _direction;
@@ -109,6 +111,7 @@ public class EntityMovement : MonoBehaviour
     private void StopMove(InputAction.CallbackContext obj)
     {
         _direction = Vector2.zero;
+        _audioSource.Stop();
     }
 
     #endregion
