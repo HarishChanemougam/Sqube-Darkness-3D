@@ -147,8 +147,8 @@ Transform:
   m_LocalScale: {x: 0.8600782, y: 0.8600782, z: 0.8600782}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5525710737988852161}
-  m_RootOrder: 1
+  m_Father: {fileID: 1767786732141682826}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6670612980839455236
 MeshFilter:
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsFiring: 0
-  _buller: {fileID: 0}
+  _bullet: {fileID: 0}
   _bulletSpeed: 0
   _timeBetweenShots: 0
   _firePoint: {fileID: 0}
@@ -705,6 +705,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1767786732141682826}
+  - component: {fileID: 7425893225463715693}
   m_Layer: 0
   m_Name: Respawn
   m_TagString: Untagged
@@ -723,10 +724,24 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 5635387237626367898}
   m_Father: {fileID: 5525710737988852161}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7425893225463715693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8799392013696827292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09cfc6f6a482b3f49bebcba1f9ef8735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bullet: {fileID: 5536398445803031663}
 --- !u!1 &8933562721490287447
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,7 +774,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1767786732141682826}
-  - {fileID: 5635387237626367898}
   m_Father: {fileID: 6361081065322813637}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

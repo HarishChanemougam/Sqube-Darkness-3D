@@ -30,13 +30,6 @@ public class Gun : MonoBehaviour
                 _shotCounter = 0;
             }
 
-            if (Input.GetButtonDown("Fire1"))
-            {
-                
-                _bullet clone = Instantiate(projectile, transform.position, transform.rotation);
-
-                clone.timeoutDestructor = 5;
-            }
         }
     }
 }
