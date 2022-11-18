@@ -15,6 +15,7 @@ public class EntityMovement : MonoBehaviour
     [SerializeField] float _slowTime;
     [SerializeField] float _rotationSpeed;
     [SerializeField] Animator _animator;
+    [SerializeField] MeshRenderer _meshRenderer;
 
 
     [SerializeField] bool _groundPlayer;
@@ -71,8 +72,12 @@ public class EntityMovement : MonoBehaviour
         set => _blast = value;
     }
 
+    Color _initialColor;
+
     private void Start()
     {
+        _initialColor = _meshRenderer.material.GetColor("_Color");
+
         ////////////////////////////////////MOVE/////////////////////////////////
         _moveInput.action.started += Move;
         _moveInput.action.performed += Move;
@@ -209,35 +214,6 @@ public class EntityMovement : MonoBehaviour
         _direction.y = CalculatedDirection.y;
 
     }
-    #region Color
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.tag == "BlindSpot")
-        {
-            _animator.SetTrigger("2DPlayerEyeBlink");
-
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-
-            var cubeRenderer = cube.GetComponent<Renderer>();
-
-            cubeRenderer.material.SetColor("_color", Color.black);
-        }
-
-        else
-        {
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            var cubeRenderer = cube.GetComponent<Renderer>();
-            _animator.SetTrigger("2DPlayerEyeBlink2");
-            cubeRenderer.material = (null);
-        }
-    }
-
-    private void OnTriggerExit(Collider collision)
-    {
-
-    }
-
-    #endregion
     private void FixedUpdate()
     {
 

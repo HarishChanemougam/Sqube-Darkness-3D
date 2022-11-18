@@ -18,31 +18,14 @@ public class Hover : MonoBehaviour
             _renderer.material = _materialHover;
             
         }
-        else
-        {
-            _renderer.material = _materalIdle;
-        }
     }
     private void OnCollisionExit(Collision collision)
     {
-        
+        if (collision.collider.GetComponent<BlindSpotTag>() != null)
+        {
+            _renderer.material = _materalIdle;
+        }
+
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.GetComponent<BlindSpotTag>() != null)
-    //    {
-    //        _renderer.material = _materialHover;
-    //        Debug.Log("red");
-    //    }
-    //    else
-    //    {
-    //        _renderer.material = _materalIdle;
-    //    }
-    //}
-    //
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    
-    //}
 }

@@ -176,7 +176,6 @@ public class SpoxAI : MonoBehaviour
         }
     }
 
-
     #endregion
 
 }

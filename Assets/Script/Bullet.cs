@@ -9,12 +9,13 @@ public class Bullet : MonoBehaviour
     [SerializeField] float _lifeTime;
     [SerializeField] int _damageToGive;
 
+
     private void Update()
-    {
+    { 
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
         _lifeTime -= Time.deltaTime;
 
-        if(_lifeTime < 0)
+        if(_lifeTime < 5)
         {
             Destroy(gameObject);
         }

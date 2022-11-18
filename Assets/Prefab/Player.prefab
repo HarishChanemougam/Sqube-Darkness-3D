@@ -366,6 +366,7 @@ MonoBehaviour:
   _slowTime: -2.88
   _rotationSpeed: 5
   _animator: {fileID: 5422723604442139534}
+  _meshRenderer: {fileID: 605624113678091261}
   _groundPlayer: 0
   _playerVelocity: {x: 0, y: 0, z: 0}
   _gravityValue: -9.8

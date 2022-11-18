@@ -8,6 +8,6 @@ public class Spawn : MonoBehaviour
 
     private void Start()
     {
-        Bullet bulletCopy = Instantiate<Bullet>(_bullet);
+       /* Bullet bulletCopy = Instantiate<Bullet>(_bullet);*/
     }
 }
