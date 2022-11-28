@@ -172,11 +172,11 @@ public class EntityMovement : MonoBehaviour
     #region Blast
     private void BlastMode(InputAction.CallbackContext obj)
     {
-        throw new NotImplementedException();
+        _blast = true;
     }
     private void StopBlastMode(InputAction.CallbackContext obj)
     {
-        throw new NotImplementedException();
+        _blast = false;
     }
 
     #endregion
