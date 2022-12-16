@@ -1381,7 +1381,7 @@ PrefabInstance:
     - target: {fileID: 1426824993693382152, guid: 630b207d50982f148a8a637812229351,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.42
+      value: 4.45
       objectReference: {fileID: 0}
     - target: {fileID: 1426824993693382152, guid: 630b207d50982f148a8a637812229351,
         type: 3}
@@ -1418,6 +1418,11 @@ PrefabInstance:
       propertyPath: m_DeadZoneWidth
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1426824994698896171, guid: 630b207d50982f148a8a637812229351,
+        type: 3}
+      propertyPath: m_TrackedObjectOffset.y
+      value: 3.02
+      objectReference: {fileID: 0}
     - target: {fileID: 1426824994729195588, guid: 630b207d50982f148a8a637812229351,
         type: 3}
       propertyPath: orthographic size
@@ -1431,7 +1436,7 @@ PrefabInstance:
     - target: {fileID: 1426824994729195591, guid: 630b207d50982f148a8a637812229351,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.42
+      value: 4.45
       objectReference: {fileID: 0}
     - target: {fileID: 1426824994729195591, guid: 630b207d50982f148a8a637812229351,
         type: 3}

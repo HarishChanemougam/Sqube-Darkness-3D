@@ -7321,6 +7321,11 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 400311986}
+    - target: {fileID: 1426824993693382263, guid: 630b207d50982f148a8a637812229351,
+        type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 4.38
+      objectReference: {fileID: 0}
     - target: {fileID: 1426824994698896171, guid: 630b207d50982f148a8a637812229351,
         type: 3}
       propertyPath: m_TrackedObjectOffset.y
@@ -7330,6 +7335,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TrackedObjectOffset.z
       value: 0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 1426824994729195588, guid: 630b207d50982f148a8a637812229351,
+        type: 3}
+      propertyPath: orthographic size
+      value: 4.38
       objectReference: {fileID: 0}
     - target: {fileID: 1426824994729195591, guid: 630b207d50982f148a8a637812229351,
         type: 3}
