@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 4116506882600455545}
   - component: {fileID: 3351975466653809576}
   - component: {fileID: 6201213630603038540}
+  - component: {fileID: 2887054689146057701}
+  - component: {fileID: 830052531753130092}
   m_Layer: 0
   m_Name: Cone
   m_TagString: Untagged
@@ -114,6 +116,39 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.02, y: 0.020000005, z: 0.020000005}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2887054689146057701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969966265749933133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3bc9ec33e001034598cf1466cba66bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stop: 1
+  _sceneIndex: 1
+--- !u!114 &830052531753130092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1969966265749933133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf5453d0ca43b16418702b9c83ba63cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MonkeyRenderer: {fileID: 4116506882600455545}
+  _MonkeyMaterialIdle: {fileID: 2100000, guid: b820fbc5bcc20ee428f9de9f7a08464f, type: 2}
+  _MonkeyMaterialHover: {fileID: 2100000, guid: 6154d3f895751ea42b43fd04b3c917ef,
+    type: 2}
+  _materalIdle: {fileID: 2100000, guid: 2b4eb55e08960a24790381e72c05228e, type: 2}
+  _player: {fileID: 0}
+  _gameOver: {fileID: 2887054689146057701}
 --- !u!1 &5987867314867289801
 GameObject:
   m_ObjectHideFlags: 0

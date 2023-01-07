@@ -23,9 +23,9 @@ public class SpoxAI : MonoBehaviour
     [SerializeField] float _destinationDistance;
     [SerializeField] float _loseDistance;
     [SerializeField] NavMeshAgent _agent;
-    [SerializeField] DetectPlayer _detectPlayer;
-    [SerializeField] EntityMovement _player;
-    [SerializeField] GameOver _gameOver;
+    /*[SerializeField] DetectPlayer _detectPlayer;*/
+   /* [SerializeField] EntityMovement _player;*/
+    /*[SerializeField] GameOver _gameOver;*/
 
     [ShowNonSerializedField] AIState _internalState;
     [ShowNonSerializedField] int _patrolCurrentIndex;
@@ -53,53 +53,53 @@ public class SpoxAI : MonoBehaviour
                 Patrol();
 
                
-                if (_detectPlayer.Target != null) 
+               /* if (_detectPlayer.Target != null) 
                 {
                     _internalState = AIState.CHASE;
-                }
+                }*/
                 break;
 
             case AIState.CHASE:
                 Chase();
-                if (_detectPlayer.Target == null)  
-                {
-                    _internalState = AIState.PATROL;
-                    break;
-                }
+                /* if (_detectPlayer.Target == null)  
+                 {
+                     _internalState = AIState.PATROL;
+                     break;
+                 }*/
 
-                var distanceToPlayer = Vector3.Distance(_root.transform.position, _detectPlayer.Target.transform.position);
+               /* var distanceToPlayer = Vector3.Distance(_root.transform.position, _detectPlayer.Target.transform.position);
 
                 if (distanceToPlayer < _loseDistance) 
                 {
                     _internalState = AIState.CATCH;
-                }
+                }*/
 
                 break;
 
             case AIState.CATCH:
                 Catch();
-                if (_detectPlayer.Target == null)   
+                /*if (_detectPlayer.Target == null)   
                 {
                     _internalState = AIState.PATROL;
                     break;
-                }
+                }*/
                
-                var distanceToPlayer2 = Vector3.Distance(_root.transform.position, _detectPlayer.Target.transform.position);
+               /* var distanceToPlayer2 = Vector3.Distance(_root.transform.position, _detectPlayer.Target.transform.position);
                 if (distanceToPlayer2 > _loseDistance) 
                 {
                     _internalState = AIState.CHASE;
 
-                }
+                }*/
                 break;
 
             case AIState.ATTACK:
                 Attack();
 
-                if (_detectPlayer.Target == _player.transform)
+                /*if (_detectPlayer.Target == _player.transform)
                 {
                     Destroy(_player.gameObject);
                     _gameOver.EndGame();
-                }
+                }*/
 
                 break;
 
@@ -130,7 +130,7 @@ public class SpoxAI : MonoBehaviour
     public void Chase()
     {
      
-        _agent.SetDestination(_detectPlayer.Target.transform.position);
+       /* _agent.SetDestination(_detectPlayer.Target.transform.position);*/
     }
 
     public void Catch()
@@ -140,11 +140,11 @@ public class SpoxAI : MonoBehaviour
     private void Attack()
     {
         
-            if (_detectPlayer.Target == _player.transform)
+           /* if (_detectPlayer.Target == _player.transform)
             {
                 Destroy(_player.gameObject);
                 _gameOver.EndGame();
-            }
+            }*/
         
     }
 

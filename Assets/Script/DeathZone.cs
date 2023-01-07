@@ -13,6 +13,7 @@ public class DeathZone : MonoBehaviour
         {
             Destroy(collision.gameObject);
             _gameOver.EndGame();
+            Debug.Log("Destroyed");
         }
     }
 

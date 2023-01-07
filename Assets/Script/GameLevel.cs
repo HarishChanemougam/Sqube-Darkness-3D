@@ -29,12 +29,4 @@ public class GameLevel : MonoBehaviour
             yield return null;
         }
     }
-   
-      /*   public Level CurrentLevel
-        {
-           get => _currentLevel;
-           Set => _currentLevl = value;
-        }*/
-
-
 }

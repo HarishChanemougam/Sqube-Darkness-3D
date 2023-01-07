@@ -7,15 +7,17 @@ using UnityEngine.SceneManagement;
 public class GameOver : MonoBehaviour
 {
     [SerializeField] float _stop;
+    [SerializeField, Scene] int _sceneIndex;
+
 
     public void EndGame()
     {
-        StartCoroutine(EndGameRoutine());
+        StartCoroutine(LoadAsynchronously(_sceneIndex));
     }
 
-    IEnumerator EndGameRoutine()
+    IEnumerator LoadAsynchronously(int sceneIndex)
     {
         yield return new WaitForSeconds(_stop);
-        SceneManager.LoadScene(0);
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
     }
 }
